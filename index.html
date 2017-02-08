@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+
+<html><!-- #BeginTemplate "/templates/template.dwt" --><!-- DW6 -->
+<head>
+<!-- #BeginEditable "doctitle" --> 
+<title>cINNaMoneD - Home</title>
+<!-- #EndEditable -->
+<meta http-equiv="Content-Type" content="text/html;">
+
+<link rel="stylesheet" href="css/styles.css" type="text/css">
+</head>
+<body>
+<table class="headContainer">
+  <tr> 
+    <td style="padding:0px; border-width:0px;"><img src="images/logo.png" alt="logo here"></td>
+    <td style="padding:5px; border-width:0px; text-align:center">
+		<span class="pageTitle"><span style="font-size:1.4em; font-weight:bold">CINNAMONED</span><br/>geometriCally INvariant NormAlization of MetabOlomic kidNEy Data</span>
+	</td>
+  </tr>
+  <tr> 
+    <td colspan=2 style="height:5px; background-color:#FF8542; padding:0px; border-width:0px;"></td>
+  </tr>
+</table>
+<table class="menuContainer"><tr><td><table class="menuContainer" style="width:40%">
+  <tr>
+    <td class="menuCell"><a href="index.html">Home</a></td>
+    <td class="menuCell"><a href="php/cinnamoned.php">Application</a></td>
+    <td class="menuCell"><a href="php/database.php">Database</a></td>
+    <td class="menuCell"><a href="help.html">Help</a></td>
+    <td class="menuCell"><a href="contact.html">Contact</a></td> 
+  </tr>
+</table></td></tr></table>
+<table class="mainContainer">
+  <tr> 
+    <td class="mainContainer" style="height:80%;"> 
+      <table class="mainContainer">
+        <tr> 
+          <td class="leftContainer"></td>
+          <td class="mainContainer"> 
+            <p class="title">Home</p>
+            <p class="text">cINNaMoneD is a web-based application, which performs peak detection, noise filtering, retention time
+            alignment and intensity normalization in one ore more samples of CE/MS data, coming from urine derived
+            from human patients with a variety of renal diseases. Each of the above steps is performed per sample.
+            The procedure starts by peak detection using the matchedFilter algorithm of the Bioconductor package
+            xcms (<a href="http://www.ncbi.nlm.nih.gov/pubmed/16448051" target="_blank">Smith et al., 2006</a>). Then for each sample,
+            the detected masses are matched to a reference dataset, consisting of 6044 mz/retention time pairs, derived
+            from 75 CE/MS urine samples including control and healthy samples as well as samples extracted from a
+            variety of renal diseases. The matched mz pairs between new samples and the reference dataset, contain
+            a subset of invariant mz values across most reference samples. These invariant mz/retention time pairs
+            are used for the time alignment of the new samples to the reference dataset, as wel as for intensity
+            scaling so that the new samples become comparable with the reference dataset and among themselves. The
+            time alignment is based on a clustering procedure along the matched invariant entities coupled with
+            local regression and the intensity scaling is performed using a local regression curve constructed
+            using the intensity of the invariant entities and e reference sample which is the weighted mean of the
+            matched mz/retention time pairs from the reference dataset.</p>
+            <p class="text">The reference dataset was initially processed, fine tuned, annotated and summarized using the Bioconductor
+            package xcms (<a href="http://www.ncbi.nlm.nih.gov/pubmed/16448051" target="_blank">Smith et al., 2006</a>), the 
+            Bioconductor package CAMERA (<a href="http://www.ncbi.nlm.nih.gov/pubmed/22111785" target="_blank">Kuhl, et al., 2012</a>),
+            several in-house routines. The dataset was furthermore annotated using a local installation of the 
+            <a href="http://www.ebi.ac.uk/chebi/" target="_blank">ChEBI</a> small molecule database, the Human Metabolome Database 
+            (<a href="http://www.hmdb.ca/" target="_blank">HMDB</a>) and the publicly available web services of Kyoto Encyclopedia 
+            for Genes and Genomes (<a href="http://www.genome.jp/kegg/" target="_blank">KEGG</a>). The invariant mz/retention time 
+            pairs were selected using an automated method based on geometrical criteria coupled with an iterative 
+            selection algorithm that minimizes a variability measure of the invariant set and assesses the efficiency 
+            based on the effect of normalization of the total dataset. </p><br/><br/>
+            <p class="text"><strong><font color="#FF0000">Start</font></strong> using the cINNaMoneD <strong><a href="php/cinnamoned.php">application</a></strong> or consult the user's <strong><a href="help.html">guide</a></strong>.</p>
+          </td>
+          <td class="rightContainer"></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr> 
+    <td class="footer">Copyright &copy; 2012 <a href="http://www.renalfibrosis.fr" class="whitetext" target="_blank">RF Lab</a>/<a href="http://www.inserm.fr/" class="whitetext" target="_blank">Inserm</a>,  Designed by <a href="http://www.grissom.gr/pmoulos/" class="whitetext" target="_blank">Panagiotis Moulos</a></td>
+  </tr>
+  <tr> 
+    <td style="height:5px; background-color:#FF8542; padding:0px; border-width:0px;"></td>
+  </tr>
+</table>
+</body>
+</html>

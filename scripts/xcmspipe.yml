@@ -1,0 +1,120 @@
+# xcmsPipeline parameters file
+# Time filtering
+filter:
+ do: FALSE
+ min: 600
+ max: 3600
+# Runtime parameters
+read:
+ nSlaves: 1
+# Read raw data
+ profstep: 1
+ profmethod: binlin
+# Find peaks
+find:
+ method:
+ - matchedFilter
+ - centWave
+ fwhm: 30
+ sigma: 7
+ max: 5
+ step: 0.1
+ steps: 3
+ mzdiff: 0.5
+ ppm: 25
+ peakwidth:
+ - 10
+ - 40
+ prefilter:
+ - 3
+ - 100
+ mzCenterFun: wMean
+ integrate: 1
+ mzdiff.cw: -0.001
+ fitgauss: FALSE
+ scanrange:
+ noise: 0
+ verbose.columns: FALSE
+ snthresh: 7
+ sleep: 0
+# Group peaks
+group:
+ method:
+ - density
+ - mzClust
+ - nearest
+ bw:
+ - 50
+ - 30
+ - 20
+ - 10
+ - 10
+ mzwid: 0.25
+ max: 50
+ mzppm: 20
+ mzabs: 0
+ mzVsRTbalance: 10
+ mzCheck: 0.2
+ rtCheck: 15
+ kNN: 10
+ minfrac: 0.5
+ minsamp: 1
+ sleep: 0
+# RT correction
+retcor:
+ method:
+ - loess
+ - obiwarp
+ missing: 1
+ extra: 1
+ smooth: loess
+ span: 0.5
+ family: symmetric
+ profStep: 1
+ center: NULL
+ response: 1
+ score: cor
+ gapInit: 0
+ gapExtend: 0
+ factorDiag: 2
+ factorGap: 1
+ localAlignment: 0
+ initPenalty: 0
+ plottype: mdevden
+ col: NULL
+ ty: NULL
+# Peak extraction
+extract:
+ method: maxint
+ value: into
+ intensity: into
+# Annotation
+annotate:
+ group: both
+ iso.flow: fwhm
+ sigma: 6
+ perfwhm: 0.6
+ pval: 0.05
+ cor_eic_th: 0.75
+ find.adducts: TRUE
+ maxiso: 5
+ mzabs.add: 0.01
+ mzabs.fiso: 0.01
+ mzabs.diso: 0.001
+ ppm.fiso: 10
+ ppm.diso: 5
+ polarity: positive
+ rulefile: NULL
+ filter.valid: valid
+ filter.score: 0.75
+ peak.val: maxo
+ filter.dbe: NULL
+ write.output: NULL
+ run.par: TRUE
+ more.adducts: FALSE
+ fail.rules: internal
+ export.what: all
+# - peaks
+# - formulas
+# - theor.mass
+# - delta.ppm

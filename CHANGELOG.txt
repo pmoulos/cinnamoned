@@ -1,0 +1,8 @@
+31 - 10 - 2012
+
+- is.retcor: Added a functionality to remove singleton clusters as they might cause outliers
+  in retention time correction
+
+Idea! Use somehow the within cluster sum of squares as extra information to create a function for an
+adaptive loess span. Use also the cluster size.
+Check what is going on with the new intensity normalization function drafts.

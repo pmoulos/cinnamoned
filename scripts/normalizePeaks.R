@@ -73,9 +73,9 @@ bootstrap.IS <- function(peaks,baseline=NULL,iset,method="raffy",opt="data",meas
 	if ((measure=="qn" || measure=="sn") && !require(robustbase))
 		stop("R package robustbase is required!")
 
-	if(multicore && !require(multicore))
+	if(multicore && !require(parallel))
 	{
-		disp("Package multicore required to run in parallel... Switching to single core...")
+		disp("Package parallel required to run in parallel... Switching to single core...")
 		multicore=FALSE
 	}
 
@@ -901,9 +901,9 @@ geom.norm <- function(peaks,baseline=NULL,grid.size=5*nrow(peaks),squared=FALSE,
 	if (minstat!="sumq" && minstat!="rcv")
 		stop("minstat must be one of \"sumq\" or \"rcv\"!")
 	
-	if (multicore && !require(multicore))
+	if (multicore && !require(parallel))
 	{
-		stop("R package multicore is required! Switching to single core...")
+		stop("R package parallel is required! Switching to single core...")
 		multicore <- FALSE
 	}
 		
@@ -1275,9 +1275,9 @@ iterative.select <- function(Xo,ref,f,scal="mad",output=c("set","list","matrix")
 {
 	require(utils)
 
-	if(multicore && !require(multicore))
+	if(multicore && !require(parallel))
 	{
-		disp("Package multicore required to run in parallel... Switching to single core...")
+		disp("Package parallel required to run in parallel... Switching to single core...")
 		multicore=FALSE
 	}
 

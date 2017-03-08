@@ -21,16 +21,16 @@ xcmsPipeline <- function(path.to.raw,info.file,param.file,path.to.trunc=NULL,ann
 
 	if (multicore)
 	{
-		if (!require(multicore))
+		if (!require(parallel))
 		{
-			warning("R package multicore not present... Switching to single core...",
+			warning("R package parallel not present... Switching to single core...",
 					call.=FALSE)
 			multicore <- FALSE
 		}
 		else
 		{
-			require(multicore)
-			n.core <- multicore:::detectCores()
+			require(parallel)
+			n.core <- parallel:::detectCores()
 			if (n.core==1)
 			{
 				warning("Only one core detected... Switching to single core...",
@@ -108,7 +108,7 @@ xcmsPipeline <- function(path.to.raw,info.file,param.file,path.to.trunc=NULL,ann
 		if (multicore)
 		{
 			the.xfiles <- as.list(the.raw.files)
-			n.core <- multicore:::detectCores()
+			n.core <- parallel:::detectCores()
 			if (length(the.xfiles)<=6)
 				options(cores=length(the.xfiles))
 			else

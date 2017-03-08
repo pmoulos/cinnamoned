@@ -1,7 +1,7 @@
 # Remove raw files, compress the project directory and remove the files in the archive
 
 ROOT_PATH="/media/HD3/cprocess"
-APP_PATH="/media/HD5/Work/cinnamoned"
+APP_PATH="/media/raid/www/cinnamoned"
 
 cd $ROOT_PATH
 for i in *
@@ -35,4 +35,3 @@ do
 		cd ..
 	fi
 done
-

@@ -108,10 +108,11 @@ normalizeSamples <- function(peaks,dbdata,method=c("geom","rlm","both"),normaliz
 		for (i in 1:length(peaks))
 		{
 			rem.idx <- which(peaks[[i]]$rt<time.range[[i]][1] | peaks[[i]]$rt>time.range[[i]][2])
-			peaks[[i]] <- peaks[[i]][-rem.idx,]
+			if (length(rem.idx)>0)
+				peaks[[i]] <- peaks[[i]][-rem.idx,]
 		}
 	}
-	
+
 	# Get normalizers and reference data from the database and create the match lists
 	ref <- getRefData(method,dbdata)
 	iset.ref <- which(ref[,paste("is_",method,sep="")]==1)
@@ -282,7 +283,10 @@ normalizeSamples <- function(peaks,dbdata,method=c("geom","rlm","both"),normaliz
 		names(norm.inten) <- paste("Intensity - ",expnames)
 
 		if (export.type=="all")
+		{
 			final <- cbind(norm.ref,norm.mz,norm.rt,norm.inten)
+			write.table(final,file=export,quote=FALSE,sep="\t",na="-",row.names=FALSE)
+		}
 		else if (export.type=="armada")
 		{
 			tmp.norm <- norm$norminten
@@ -293,9 +297,10 @@ normalizeSamples <- function(peaks,dbdata,method=c("geom","rlm","both"),normaliz
 			nam <- names(final)
 			nam[1] <- "id"
 			names(final) <- nam
+			write.table(final,file=export,quote=FALSE,sep="\t",na="NaN",row.names=FALSE)
 		}
 			
-		write.table(final,file=export,quote=FALSE,sep="\t",na="-",row.names=FALSE)
+		#write.table(final,file=export,quote=FALSE,sep="\t",na="-",row.names=FALSE)
 	}
 		
 	return(list(norm=norm,iset=iset.match,pct=pcts))

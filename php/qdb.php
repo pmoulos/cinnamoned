@@ -317,7 +317,10 @@ function getRunDiagnostics($id)
 		{
 			$line = fgets($fh);
 			$line = explode("\t",trim($line));
-			$matches[$line[0]] = $line[1];
+			$matches[$line[0]]["total"] = $line[1];
+			$matches[$line[0]]["is"] = $line[2];
+			$matches[$line[0]]["is_rt"] = $line[3];
+			$matches[$line[0]]["is_inten"] = $line[4];
 		}
 		fclose($fh);
 		$matches = array_filter($matches);
@@ -522,9 +525,16 @@ function getMetabolites($input,$by)
 		
 		$conn = open_connection_s();
 		$result = mysql_query($query,$conn);
-		while(list($id,$mz,$rt) = mysql_fetch_array($result))
+		if ($result)
 		{
-			$output[] = array("id" => $id,"mz" => sprintf("%.6f",$mz),"rt" => sprintf("%.6f",$rt));
+			while(list($id,$mz,$rt) = mysql_fetch_array($result))
+			{
+				$output[] = array("id" => $id,"mz" => sprintf("%.6f",$mz),"rt" => sprintf("%.6f",$rt));
+			}
+		}
+		else
+		{
+			$output[] = array("id" => "-","mz" => "-","rt" => "-");
 		}
 		close_connection($conn);
 	}
@@ -648,9 +658,16 @@ function getAutoMetabo($term)
 	$conn = open_connection_s();
 	$query = $auto_metab_1.'\'%'.$term.'%\''.$auto_metab_2;
 	$result = mysql_query($query,$conn);
-	while ($m = mysql_fetch_array($result,MYSQL_NUM))
+	if ($result)
 	{
-		$opts[] = $m[0];
+		while ($m = mysql_fetch_array($result,MYSQL_NUM))
+		{
+			$opts[] = $m[0];
+		}
+	}
+	else
+	{
+		$opts[] = "-";
 	}
 	close_connection($conn);
 	return($opts);
